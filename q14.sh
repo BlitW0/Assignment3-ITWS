@@ -4,17 +4,22 @@ echo "<head>" >> q14.html
 echo "<style>" >> q14.html
 echo "table {" >> q14.html
 echo "	border-collapse: collapse;" >> q14.html
+echo " 	border: 2px solid black;" >> q14.html
 echo "}" >> q14.html
 echo "td {" >> q14.html
+echo "	width: 33%" >> q14.html
+echo "}" >> q14.html
+echo "th {" >> q14.html
+echo "	border: 2px solid black;" >> q14.html
 echo "	width: 33%" >> q14.html
 echo "}" >> q14.html
 echo "</style>" >> q14.html
 echo "</head>" >> q14.html
 echo "<body>" >> q14.html
 
-echo "<table style=\"border:1px solid black\" border=\"1\">" >> q14.html
+echo "<table border=\"1\">" >> q14.html
 home=`echo ~`
-for i in `find ~ -type d`
+for i in `find ~ -not -path '*/\.*' -type d`
 do
 	if [ "$i" == "$home" ]; then
 		dir="Home Directory"
@@ -22,15 +27,15 @@ do
 		dir=`echo ${i#$home/}`
 	fi
 	echo "<tr>" >> q14.html
-	echo "	<td colspan=\"3\" style=\"text-align:center\"><b>$dir</b></td>" >> q14.html
+	echo "	<th colspan=\"3\" style=\"text-align:center\">$dir</th>" >> q14.html
 	echo "</tr>" >> q14.html
 	if [ "$(ls -A $i)" ]; then
 		echo "<tr>" >> q14.html
-		echo "	<td><b>Name</b></td>" >> q14.html
-		echo "	<td><b>Size</b></td>" >> q14.html
-		echo "	<td><b>File/Dir</td>" >> q14.html
+		echo "	<th>Name</th>" >> q14.html
+		echo "	<th>Size</th>" >> q14.html
+		echo "	<th>File/Dir</th>" >> q14.html
 		echo "</tr>" >> q14.html
-		find $i -maxdepth 1 | while read a
+		find $i -maxdepth 1 -not -path '*/\.*' | while read a
 		do
 			if [ "$a" != "$i" ]; then
 			    chk=`basename "$a"`
