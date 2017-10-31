@@ -64,3 +64,4 @@ echo "</table>" >> q14.html
 
 echo "</body>" >> q14.html
 echo "</html>" >> q14.html
+firefox q14.html &
